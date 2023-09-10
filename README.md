@@ -35,3 +35,22 @@ GitHUB - склонировать данный проект
    + для PostgreSQL: 
 
    ```java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar```
+
+4. Запускаем авто-тесты командой
+   + для MySQL:
+   
+     ```./gradlew clean test "-Ddatasource.url=jdbc:mysql://localhost:3306/app"```
+   + для PostgreSQL:
+   
+     ```./gradlew clean test "-Ddatasource.url=jdbc:postgresql://localhost:5432/app"```
+5. Генерируем отчёт по итогам тестирования с помощью Allure командой:
+
+   ```./gradlew allureServe```
+
+Отчет автоматически откроется в браузере.
+
+После работы с отчетом, останавливаем работу **АllureServe** в терминале при помощи сочетания клавиш Ctrl + C и подтверждаем в терминале клавишей Y
+
+## Документация
+[План автоматизации тестирования](docs/Plan.md)
+   
