@@ -26,19 +26,19 @@ GitHUB - склонировать данный проект
 
 ```docker-compose up```
 
-2. Запускаем из дериктории ./artifacts/gate-simulator эмулятор банковских сервисов командой в терминале командой
+2. Запускаем SUT. 
++ для MySQL: 
 
-```npm start```
+  + В консоле ввести команду: ```java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar```
+  + В классе `src/test/java/data/SQLHelper.java` вставить значение `url` в функции `getConnection` `jdbc:mysql://localhost:3306/app` 
+    
++ для PostgreSQL: 
 
-3. Запускаем SUT командой в терминале
-   + для MySQL: 
+  + В консоле ввести команду: 
+  + ```java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar```
+  + В классе `src/test/java/data/SQLHelper.java` вставить значение `url` в функции `getConnection` `jdbc:postgresql://localhost:5432/app`
 
-   ```java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar```
-   + для PostgreSQL: 
-
-   ```java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar```
-
-4. Запускаем авто-тесты командой
+3. Запускаем авто-тесты командой
    + для MySQL:
    
      ```./gradlew clean test "-Ddatasource.url=jdbc:mysql://localhost:3306/app"```

@@ -13,7 +13,8 @@ services:
       - MYSQL_PASSWORD=pass
 
   postgresql:
-    image: postgres:12-alpine
+    image: postgres:13
+    restart: always
     ports:
       - '5432:5432'
     volumes:
@@ -22,3 +23,8 @@ services:
       - POSTGRES_DB=app
       - POSTGRES_USER=app
       - POSTGRES_PASSWORD=pass
+
+  node-app:
+    build: ./artifacts/gate-simulator
+    ports:
+      - '9999:9999'
