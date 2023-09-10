@@ -1,1 +1,0 @@
-{"uuid":"8f71c8cb-4c5a-46b1-9def-5e8ecbb2bce4","name":"shouldDenyWithDiclinedCard()","children":["ee6f80e1-7a43-4320-bf5f-6fdce8b8944d"],"befores":[{"name":"setup","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1694161400267,"stop":1694161403153}],"afters":[],"start":1694161400196,"stop":1694161419428}

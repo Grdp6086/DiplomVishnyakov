@@ -1,1 +1,0 @@
-{"uuid":"212fa557-ae97-4f6e-ac3f-6bd670425611","name":"shouldDenyOwnerFieldWithSpecialsChars()","children":["0a887c7e-3bcd-4e5c-a8cc-bdb5e4cdd0fe"],"befores":[{"name":"setup","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1694344573667,"stop":1694344573773}],"afters":[],"start":1694344573665,"stop":1694344584538}

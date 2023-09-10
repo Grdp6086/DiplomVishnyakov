@@ -1,1 +1,0 @@
-{"uuid":"acc016bd-e35b-4945-b9e0-8a48d0758aa2","name":"shouldEmptyYearFieldWithCyrillicChars()","children":["6c9fb0ce-6884-467c-9d67-226718241790"],"befores":[{"name":"setup","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1694165848262,"stop":1694165851760}],"afters":[],"start":1694165848185,"stop":1694165852273}

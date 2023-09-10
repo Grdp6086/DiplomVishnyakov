@@ -16,31 +16,58 @@ public class SQLHelper {
     @SneakyThrows
     public static void clear() {
         QueryRunner runner = new QueryRunner();
-        try (var connection = getConnection()) {
-            runner.execute(connection, "DELETE FROM credit_request_entity");
-            runner.execute(connection, "DELETE FROM order_entity");
-            runner.execute(connection, "DELETE FROM payment_entity");
-        }
+        var connection = getConnection();
+        runner.execute(connection, "DELETE FROM credit_request_entity");
+        runner.execute(connection, "DELETE FROM order_entity");
+        runner.execute(connection, "DELETE FROM payment_entity");
+
     }
 
     @SneakyThrows
     public static String getDebitPaymentStatus() {
         QueryRunner runner = new QueryRunner();
-        String SqlStatus = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1";
-        try (var connection = getConnection()) {
-            String result = runner.query(connection, SqlStatus, new ScalarHandler<>());
-            return result;
-        }
+        var sqlStatus = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1";
+        var connection = getConnection();
+        return runner.query(connection, sqlStatus, new ScalarHandler<String>());
 
     }
 
     @SneakyThrows
     public static String getCreditPaymentStatus() {
         QueryRunner runner = new QueryRunner();
-        String SqlStatus = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
-        try (var connection = getConnection()) {
-            String result = runner.query(connection, SqlStatus, new ScalarHandler<>());
-            return result;
-        }
+        var sqlStatus = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
+        var connection = getConnection();
+            return runner.query(connection, sqlStatus, new ScalarHandler<String>());
     }
+
+    @SneakyThrows
+    public static String getDebitOrderEntryId(){
+        QueryRunner runner = new QueryRunner();
+        var sqlStatus = "SELECT payment_id FROM order_entity ORDER BY created DESC LIMIT 1";
+        var connection = getConnection();
+        return runner.query(connection, sqlStatus, new ScalarHandler<String>());
+    }
+
+    @SneakyThrows
+    public static String getDebitPaymentID(){
+        QueryRunner runner = new QueryRunner();
+        var sql = "SELECT transaction_id FROM payment_entity ORDER BY created DESC LIMIT 1";
+        var connection = getConnection();
+        return runner.query(connection,sql, new ScalarHandler<String>());
+    }
+    @SneakyThrows
+    public static String getCreditRequestReEntryId(){
+        QueryRunner runner = new QueryRunner();
+        var sql = "SELECT bank_id FROM credit_request_entity ORDER BY created DESC LIMIT 1";
+        var connection = getConnection();
+        return runner.query(connection, sql, new ScalarHandler<String>());
+    }
+    @SneakyThrows
+    public static String getCreditOrderEntryId(){
+        QueryRunner runner = new QueryRunner();
+        var sql = "SELECT credit_id FROM order_entity ORDER BY created DESC LIMIT 1";
+        var connection = getConnection();
+        return runner.query(connection, sql, new ScalarHandler<String>());
+    }
+
 }

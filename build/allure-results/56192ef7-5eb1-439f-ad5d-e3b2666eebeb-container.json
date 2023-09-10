@@ -1,1 +1,0 @@
-{"uuid":"56192ef7-5eb1-439f-ad5d-e3b2666eebeb","name":"shoulDenyWithEmptyCardField()","children":["8a9d85c3-b9d7-4697-80ee-24e68946eec0"],"befores":[{"name":"setup","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1694161692522,"stop":1694161696042}],"afters":[],"start":1694161692447,"stop":1694161712259}
