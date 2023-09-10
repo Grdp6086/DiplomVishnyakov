@@ -1,0 +1,1 @@
+{"uuid":"a8150755-4d50-4548-8e3d-7d3b8bac4e26","name":"shouldEmptyCVCFieldWithHieroglyphsChars()","children":["6d685e0a-1f55-4c72-9ef9-32417143852c"],"befores":[{"name":"setup","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1694344712932,"stop":1694344713030}],"afters":[],"start":1694344712931,"stop":1694344713211}

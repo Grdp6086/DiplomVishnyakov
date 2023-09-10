@@ -17,8 +17,14 @@ public class DataHelper {
     public static CardInfo getFirstCardInfo(){
         return new CardInfo("4444444444444441");
     }
+    public static String getFirstCardStatus(){
+        return new String("APPROVED");
+    }
     public static CardInfo getSecondCardInfo(){
         return new CardInfo("4444444444444442");
+    }
+    public static String getSecondCardStatus(){
+        return new String("DECLINED");
     }
     public static CardInfo getGenerateInvalidCardInfo(String locale){
         Faker faker = new Faker(new Locale(locale));
@@ -40,8 +46,21 @@ public class DataHelper {
         var month = faker.name().firstName();
         return new MonthInfo(month);
     }
+    public static MonthInfo getGenerateInvalidMonthDate(int shift){
+        var month = LocalDate.now().minusMonths(shift).format(DateTimeFormatter.ofPattern("MM"));
+        return new MonthInfo(month);
+    }
     public static MonthInfo getEmptyMonth(){
         return new MonthInfo("");
+    }
+
+    public static MonthInfo getInvalidAmountNumbersMonths(int digits){
+        Faker faker = new Faker();
+        var month = faker.number().digits(digits);
+        return new MonthInfo(month);
+    }
+    public static MonthInfo getEnterMonth(String enter){
+        return new  MonthInfo(enter);
     }
     public static MonthInfo getSpecialsSymbolMonth(){
         return new MonthInfo("&#");
@@ -58,8 +77,18 @@ public class DataHelper {
         var year = faker.name().firstName();
         return new YearInfo(year);
     }
+
     public static YearInfo getSpecialsSymbolsYearInfo(){
         return new YearInfo("((");
+    }
+    public static YearInfo getInvalidAmountNumbersYear(int digits){
+        Faker faker = new Faker();
+        var owner = faker.number().digits(digits);
+        return new YearInfo(owner);
+    }
+    public static YearInfo getGenerateInvalidYearDate(int shift){
+        var year = LocalDate.now().minusYears(shift).format(DateTimeFormatter.ofPattern("yy"));
+        return new YearInfo(year);
     }
     public static OwnerInfo generateOwner(String locale){
         Faker faker = new Faker(new Locale(locale));
@@ -69,9 +98,9 @@ public class DataHelper {
     public static OwnerInfo getEmptyOwner(){
         return new OwnerInfo("");
     }
-    public static OwnerInfo getGenerateNumberOwner(){
+    public static OwnerInfo getGenerateNumberOwner(int digits){
         Faker faker = new Faker();
-        var owner = faker.number().digits(7);
+        var owner = faker.number().digits(digits);
         return new OwnerInfo(owner);
     }
     public static OwnerInfo getSpecialsSymbolsOwner(){
@@ -92,6 +121,9 @@ public class DataHelper {
     }
     public static CvcInfo getSpecialSymbolsCvcCode(){
         return new CvcInfo("&^%");
+    }
+    public static CvcInfo getEnterCVC(String enter){
+        return new CvcInfo(enter);
     }
 
     @Value

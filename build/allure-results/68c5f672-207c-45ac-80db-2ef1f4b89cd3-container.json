@@ -1,0 +1,1 @@
+{"uuid":"68c5f672-207c-45ac-80db-2ef1f4b89cd3","name":"shouldEmptyCVCFieldWithLatinChars()","children":["c8519578-b8e6-4dd1-a236-0d6c1518900d"],"befores":[{"name":"setup","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1694169398973,"stop":1694169402591}],"afters":[],"start":1694169398890,"stop":1694169403271}

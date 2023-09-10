@@ -1,0 +1,1 @@
+{"uuid":"bb0f5576-702e-42db-8a19-ef4f48fcc807","name":"shouldPurchaseWithApprovedCard()","children":["d76aa6a6-642f-43ef-b964-acbf8eadb586"],"befores":[{"name":"setup","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1694158747514,"stop":1694158750425}],"afters":[],"start":1694158747447,"stop":1694158754733}

@@ -1,0 +1,1 @@
+{"uuid":"f295c49d-dd41-4015-bc4c-e1913e6eb95f","name":"shouldBeEmptyCardFieldWithHieroglyphsChars()","children":["f62c331c-770b-4bbd-bbf9-fb277ca7146b"],"befores":[{"name":"setup","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1694163982898,"stop":1694163985654}],"afters":[],"start":1694163982825,"stop":1694163986195}
