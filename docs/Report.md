@@ -17,11 +17,13 @@
 
 **При подключении к СУБД MySQL**
 
-![MySQL](pic/MySQL.png)
+![MySQL](E:\Netology\Diplom\pic\MySQL.png)
+
+
 
 **При подключении к СУБД PostgreSQL**
 
-![PostgreSQL](pic/PostgreSQL.png)
+![PostgreSQL](E:\Netology\Diplom\pic\PostgreSQL.png)
 
 ## Общие рекомендации
 По результатам тестирования необходимо:
