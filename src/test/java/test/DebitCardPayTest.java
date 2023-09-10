@@ -3,6 +3,7 @@ package test;
 import data.DataHelper;
 import data.SQLHelper;
 import lombok.Value;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import page.MainPage;
@@ -20,6 +21,12 @@ public class DebitCardPayTest {
     public void setup(){
         mainPage = open("http://localhost:8080/", MainPage.class);
     }
+
+    @AfterEach
+    void clean(){
+        SQLHelper.clear();
+    }
+
     @Test
     public void shouldPurchaseWithApprovedCard(){
         paymentFormBuyPage = mainPage.payWithDebitCard();
