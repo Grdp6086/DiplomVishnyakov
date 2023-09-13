@@ -21,7 +21,7 @@
 
 **При подключении к СУБД PostgreSQL**
 
-![PostgreSQL](../pictures/postgreSQL.png)
+![PostgreSQL](../pictures/postgreSQL.jpeg)
 
 ## Общие рекомендации
 По результатам тестирования необходимо:
