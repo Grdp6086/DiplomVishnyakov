@@ -9,6 +9,7 @@ import page.MainPage;
 import page.PaymentFormBuyPage;
 
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DebitCardPayTest {
@@ -46,6 +47,7 @@ public class DebitCardPayTest {
         var cvc = DataHelper.generateCVCCode(3);
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitSuccessfulNotification();
+        sleep(3000);
         var expected = DataHelper.getFirstCardStatus();
         var actual = SQLHelper.getDebitPaymentStatus();
         assertEquals(expected, actual);
@@ -60,6 +62,7 @@ public class DebitCardPayTest {
         var cvc = DataHelper.generateCVCCode(3);
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitErrorNotification();
+        sleep(3000);
         var expected = DataHelper.getSecondCardStatus();
         var actual = SQLHelper.getDebitPaymentStatus();
         assertEquals(expected, actual);
@@ -439,6 +442,7 @@ public class DebitCardPayTest {
         var cvc = DataHelper.getEnterCVC("999");
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitSuccessfulNotification();
+        sleep(3000);
         var expected = DataHelper.getFirstCardStatus();
         var actual = SQLHelper.getDebitPaymentStatus();
         assertEquals(expected, actual);

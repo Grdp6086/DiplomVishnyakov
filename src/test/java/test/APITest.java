@@ -9,7 +9,10 @@ import page.MainPage;
 import page.PaymentFormBuyByCreditPage;
 import page.PaymentFormBuyPage;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -35,7 +38,7 @@ public class APITest {
 
 
     @Test
-    public void shouldAddPaymentIDInOrderEntry(){
+    public void shouldAddPaymentIDInOrderEntry() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getGenerateMonth(1);
@@ -43,10 +46,12 @@ public class APITest {
         var owner = DataHelper.generateOwner("EN");
         var cvc = DataHelper.generateCVCCode(3);
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
+        sleep(3000);
         var expected = SQLHelper.getDebitPaymentID();
         var actual = SQLHelper.getDebitOrderEntryId();
         assertEquals(expected, actual);
     }
+
     @Test
     public void shouldDonTAddPaymentIDInOrderEntryStatusDeclined(){
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -56,10 +61,12 @@ public class APITest {
         var owner = DataHelper.generateOwner("EN");
         var cvc = DataHelper.generateCVCCode(3);
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
+        sleep(3000);
         var expected = SQLHelper.getDebitPaymentID();
         var actual = SQLHelper.getDebitOrderEntryId();
         assertNotEquals(expected, actual);
     }
+
     @Test
     public void shouldAddCreditInOrderEntry(){
         paymentFormBuyByCreditPage = mainPage.payWithCreditCard();
@@ -69,10 +76,12 @@ public class APITest {
         var owner = DataHelper.generateOwner("EN");
         var cvc = DataHelper.generateCVCCode(3);
         paymentFormBuyByCreditPage.filledForm(cardNumber, month, year, owner, cvc);
+        sleep(3000);
         var expected = SQLHelper.getCreditRequestReEntryId();
         var actual = SQLHelper.getCreditOrderEntryId();
         assertEquals(expected, actual);
     }
+
 
     @Test
     public void shouldDonTAddCreditInOrderEntryStatusDeclined(){
@@ -83,6 +92,7 @@ public class APITest {
         var owner = DataHelper.generateOwner("EN");
         var cvc = DataHelper.generateCVCCode(3);
         paymentFormBuyByCreditPage.filledForm(cardNumber, month, year, owner, cvc);
+        sleep(3000);
         var expected = SQLHelper.getCreditRequestReEntryId();
         var actual = SQLHelper.getCreditOrderEntryId();
         assertNotEquals(expected, actual);
