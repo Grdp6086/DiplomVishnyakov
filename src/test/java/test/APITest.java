@@ -24,6 +24,7 @@ public class APITest {
     static void setUpAll() {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
+
     @AfterAll
     static void tearDownAll() {
         SelenideLogger.removeListener("allure");
@@ -31,7 +32,7 @@ public class APITest {
 
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         mainPage = open("http://localhost:8080/", MainPage.class);
     }
 
@@ -51,7 +52,7 @@ public class APITest {
     }
 
     @Test
-    public void shouldDonTAddPaymentIDInOrderEntryStatusDeclined(){
+    public void shouldDonTAddPaymentIDInOrderEntryStatusDeclined() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getSecondCardInfo();
         var month = DataHelper.getGenerateMonth(1);
@@ -65,7 +66,7 @@ public class APITest {
     }
 
     @Test
-    public void shouldAddCreditInOrderEntry(){
+    public void shouldAddCreditInOrderEntry() {
         paymentFormBuyByCreditPage = mainPage.payWithCreditCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getGenerateMonth(1);
@@ -80,7 +81,7 @@ public class APITest {
 
 
     @Test
-    public void shouldDonTAddCreditInOrderEntryStatusDeclined(){
+    public void shouldDonTAddCreditInOrderEntryStatusDeclined() {
         paymentFormBuyByCreditPage = mainPage.payWithCreditCard();
         var cardNumber = DataHelper.getSecondCardInfo();
         var month = DataHelper.getGenerateMonth(1);

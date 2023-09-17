@@ -21,6 +21,7 @@ public class DebitCardPayTest {
     static void setUpAll() {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
+
     @AfterAll
     static void tearDownAll() {
         SelenideLogger.removeListener("allure");
@@ -28,17 +29,17 @@ public class DebitCardPayTest {
 
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         mainPage = open("http://localhost:8080/", MainPage.class);
     }
 
     @AfterEach
-    void clean(){
+    void clean() {
         SQLHelper.clear();
     }
 
     @Test
-    public void shouldPurchaseWithApprovedCard(){
+    public void shouldPurchaseWithApprovedCard() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getGenerateMonth(1);
@@ -51,8 +52,9 @@ public class DebitCardPayTest {
         var actual = SQLHelper.getDebitPaymentStatus();
         assertEquals(expected, actual);
     }
+
     @Test
-    public void shouldDenyWithDiclinedCard(){
+    public void shouldDenyWithDiclinedCard() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getSecondCardInfo();
         var month = DataHelper.getGenerateMonth(1);
@@ -65,8 +67,9 @@ public class DebitCardPayTest {
         var actual = SQLHelper.getDebitPaymentStatus();
         assertEquals(expected, actual);
     }
+
     @Test
-    public void shoulDenyWithEmptyCardField(){
+    public void shoulDenyWithEmptyCardField() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getEmptyCardInfo();
         var month = DataHelper.getGenerateMonth(1);
@@ -78,7 +81,7 @@ public class DebitCardPayTest {
     }
 
     @Test
-    public void shouldDenyWithEmptyMonthField(){
+    public void shouldDenyWithEmptyMonthField() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getEmptyMonth();
@@ -90,7 +93,7 @@ public class DebitCardPayTest {
     }
 
     @Test
-    public void shouldDenyWithEmptyYearField(){
+    public void shouldDenyWithEmptyYearField() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getGenerateMonth(1);
@@ -102,7 +105,7 @@ public class DebitCardPayTest {
     }
 
     @Test
-    public void shouldDenyWithEmptyOwnerField(){
+    public void shouldDenyWithEmptyOwnerField() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getGenerateMonth(1);
@@ -114,7 +117,7 @@ public class DebitCardPayTest {
     }
 
     @Test
-    public void shouldDenyEmptyCVCField(){
+    public void shouldDenyEmptyCVCField() {
         paymentFormBuyPage = mainPage.payWithDebitCard().clear();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getGenerateMonth(1);
@@ -124,8 +127,9 @@ public class DebitCardPayTest {
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitEmptyField();
     }
+
     @Test
-    public void shouldDenyWithInvalidDateMonth(){
+    public void shouldDenyWithInvalidDateMonth() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getGenerateInvalidMonthDate(2);
@@ -137,40 +141,45 @@ public class DebitCardPayTest {
     }
 
     @Test
-    public void shouldBeEmptyCardFieldWithCyrillicChars(){
+    public void shouldBeEmptyCardFieldWithCyrillicChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getGenerateInvalidCardInfo("RU");
         paymentFormBuyPage.onlyCardField(cardNumber);
         paymentFormBuyPage.emptyCardField();
     }
+
     @Test
-    public void shouldBeEmptyCardFieldWithLatinChars(){
+    public void shouldBeEmptyCardFieldWithLatinChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getGenerateInvalidCardInfo("EN");
         paymentFormBuyPage.onlyCardField(cardNumber);
         paymentFormBuyPage.emptyCardField();
     }
+
     @Test
-    public void shouldBeEmptyCardFieldWithHieroglyphsChars(){
+    public void shouldBeEmptyCardFieldWithHieroglyphsChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getGenerateInvalidCardInfo("ja");
         paymentFormBuyPage.onlyCardField(cardNumber);
         paymentFormBuyPage.emptyCardField();
     }
+
     @Test
-    public void shouldBeEmptyCardFieldWithArabicChars(){
+    public void shouldBeEmptyCardFieldWithArabicChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getGenerateInvalidCardInfo("ar");
         paymentFormBuyPage.onlyCardField(cardNumber);
         paymentFormBuyPage.emptyCardField();
     }
+
     @Test
-    public void shouldBeEmptyCardFieldWithSpecialsChars(){
+    public void shouldBeEmptyCardFieldWithSpecialsChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getSpecialSimbolsCardInfo();
         paymentFormBuyPage.onlyCardField(cardNumber);
         paymentFormBuyPage.emptyCardField();
     }
+
     @Test
     public void shouldBeEmptyMonthFieldWithCyrillicChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -178,6 +187,7 @@ public class DebitCardPayTest {
         paymentFormBuyPage.onlyMonthField(month);
         paymentFormBuyPage.emptyMonthField();
     }
+
     @Test
     public void shouldBeEmptyMonthFieldWithLatinChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -185,6 +195,7 @@ public class DebitCardPayTest {
         paymentFormBuyPage.onlyMonthField(month);
         paymentFormBuyPage.emptyMonthField();
     }
+
     @Test
     public void shouldBeEmptyMonthFieldWithHieroglyphsChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -192,6 +203,7 @@ public class DebitCardPayTest {
         paymentFormBuyPage.onlyMonthField(month);
         paymentFormBuyPage.emptyMonthField();
     }
+
     @Test
     public void shouldBeEmptyMonthFieldWithArabicChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -199,6 +211,7 @@ public class DebitCardPayTest {
         paymentFormBuyPage.onlyMonthField(month);
         paymentFormBuyPage.emptyMonthField();
     }
+
     @Test
     public void shouldBeEmptyMonthFieldWithSpecialsChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -206,6 +219,7 @@ public class DebitCardPayTest {
         paymentFormBuyPage.onlyMonthField(month);
         paymentFormBuyPage.emptyMonthField();
     }
+
     @Test
     public void shouldDineWithSingleNumberInMonthField() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -217,43 +231,49 @@ public class DebitCardPayTest {
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitWrongFormat();
     }
+
     @Test
-    public void shouldEmptyYearFieldWithCyrillicChars(){
+    public void shouldEmptyYearFieldWithCyrillicChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var year = DataHelper.getGenerateInvalidYearInfo("RU");
         paymentFormBuyPage.onlyYearField(year);
         paymentFormBuyPage.emptyYearField();
     }
+
     @Test
-    public void shouldEmptyYearFieldWithLatinChars(){
+    public void shouldEmptyYearFieldWithLatinChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var year = DataHelper.getGenerateInvalidYearInfo("EN");
         paymentFormBuyPage.onlyYearField(year);
         paymentFormBuyPage.emptyYearField();
     }
+
     @Test
-    public void shouldEmptyYearFieldWithHieroglyphsChars(){
+    public void shouldEmptyYearFieldWithHieroglyphsChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var year = DataHelper.getGenerateInvalidYearInfo("ja");
         paymentFormBuyPage.onlyYearField(year);
         paymentFormBuyPage.emptyYearField();
     }
+
     @Test
-    public void shouldEmptyYearFieldWithArabicChars(){
+    public void shouldEmptyYearFieldWithArabicChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var year = DataHelper.getGenerateInvalidYearInfo("ar");
         paymentFormBuyPage.onlyYearField(year);
         paymentFormBuyPage.emptyYearField();
     }
+
     @Test
-    public void shouldEmptyYearFieldWithSpecialsChars(){
+    public void shouldEmptyYearFieldWithSpecialsChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var year = DataHelper.getSpecialsSymbolsYearInfo();
         paymentFormBuyPage.onlyYearField(year);
         paymentFormBuyPage.emptyYearField();
     }
+
     @Test
-    public void shouldDenyWithSingleNumberInYearField(){
+    public void shouldDenyWithSingleNumberInYearField() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getGenerateMonth(1);
@@ -263,8 +283,9 @@ public class DebitCardPayTest {
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitWrongFormat();
     }
+
     @Test
-    public void shouldDenyWithSuchNumberInYearField(){
+    public void shouldDenyWithSuchNumberInYearField() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getGenerateMonth(1);
@@ -274,8 +295,9 @@ public class DebitCardPayTest {
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitWrongCardDate();
     }
+
     @Test
-    public void shouldDenyWithInPreviousYearField(){
+    public void shouldDenyWithInPreviousYearField() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getGenerateMonth(1);
@@ -285,6 +307,7 @@ public class DebitCardPayTest {
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitCardExpired();
     }
+
     @Test
     public void shouldDenyOwnerFieldWithCyrillicChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -296,6 +319,7 @@ public class DebitCardPayTest {
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitWrongFormat();
     }
+
     @Test
     public void shouldDenyOwnerFieldWithHieroglyphsChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -307,6 +331,7 @@ public class DebitCardPayTest {
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitWrongFormat();
     }
+
     @Test
     public void shouldDenyOwnerFieldWithArabicChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -318,6 +343,7 @@ public class DebitCardPayTest {
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitWrongFormat();
     }
+
     @Test
     public void shouldDenyOwnerFieldWithSpecialsChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -329,6 +355,7 @@ public class DebitCardPayTest {
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitWrongFormat();
     }
+
     @Test
     public void shouldDenyOwnerFieldWithNumbersChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -340,6 +367,7 @@ public class DebitCardPayTest {
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitWrongFormat();
     }
+
     @Test
     public void shouldEmptyCVCFieldWithCyrillicChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -347,6 +375,7 @@ public class DebitCardPayTest {
         paymentFormBuyPage.onlyCVCField(cvc);
         paymentFormBuyPage.emptyCVCField();
     }
+
     @Test
     public void shouldEmptyCVCFieldWithLatinChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -354,6 +383,7 @@ public class DebitCardPayTest {
         paymentFormBuyPage.onlyCVCField(cvc);
         paymentFormBuyPage.emptyCVCField();
     }
+
     @Test
     public void shouldEmptyCVCFieldWithHieroglyphsChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -369,6 +399,7 @@ public class DebitCardPayTest {
         paymentFormBuyPage.onlyCVCField(cvc);
         paymentFormBuyPage.emptyCVCField();
     }
+
     @Test
     public void shouldEmptyCVCFieldWithSpecialsChars() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
@@ -376,8 +407,9 @@ public class DebitCardPayTest {
         paymentFormBuyPage.onlyCVCField(cvc);
         paymentFormBuyPage.emptyCVCField();
     }
+
     @Test
-    public void shouldRemovedMinusInMonthField(){
+    public void shouldRemovedMinusInMonthField() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getEnterMonth("-2");
@@ -387,8 +419,9 @@ public class DebitCardPayTest {
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitWrongFormat();
     }
+
     @Test
-    public void shouldRemovedZeroInMonthField(){
+    public void shouldRemovedZeroInMonthField() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getEnterMonth("00");
@@ -397,7 +430,9 @@ public class DebitCardPayTest {
         var cvc = DataHelper.generateCVCCode(3);
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitWrongCardDate();
-    }@Test
+    }
+
+    @Test
     public void shouldRemovedUpInMonthField() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
@@ -408,8 +443,9 @@ public class DebitCardPayTest {
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitWrongCardDate();
     }
+
     @Test
-    public void shouldRemovedMinusInCvcField(){
+    public void shouldRemovedMinusInCvcField() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getGenerateMonth(1);
@@ -419,8 +455,9 @@ public class DebitCardPayTest {
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitWrongFormat();
     }
+
     @Test
-    public void shouldRemovedZeroInCvcField(){
+    public void shouldRemovedZeroInCvcField() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getGenerateMonth(1);
@@ -430,8 +467,9 @@ public class DebitCardPayTest {
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyPage.waitWrongFormat();
     }
+
     @Test
-    public void shouldRemovedUpInCVCField(){
+    public void shouldRemovedUpInCVCField() {
         paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getGenerateMonth(1);

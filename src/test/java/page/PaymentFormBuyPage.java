@@ -22,12 +22,12 @@ public class PaymentFormBuyPage {
     private SelenideElement continueButton = $(byText("Продолжить"));
     private SelenideElement successfulNotification = $(byText("Операция одобрена Банком."));
     private SelenideElement errorNotification = $(byText("Ошибка! Банк отказал в проведении операции."));
-    private SelenideElement emptyField = $ (byText("Поле обязательно для заполнения"));
+    private SelenideElement emptyField = $(byText("Поле обязательно для заполнения"));
     private SelenideElement wrongFormat = $(byText("Неверный формат"));
-    private SelenideElement wrongCardDate = $ (byText("Неверно указан срок действия карты"));
+    private SelenideElement wrongCardDate = $(byText("Неверно указан срок действия карты"));
     private SelenideElement cardExpired = $(byText("Истёк срок действия карты"));
 
-    public void filledForm(DataHelper.CardInfo cardInfo, DataHelper.MonthInfo monthInfo, DataHelper.YearInfo yearInfo, DataHelper.OwnerInfo ownerInfo, DataHelper.CvcInfo cvcInfo){
+    public void filledForm(DataHelper.CardInfo cardInfo, DataHelper.MonthInfo monthInfo, DataHelper.YearInfo yearInfo, DataHelper.OwnerInfo ownerInfo, DataHelper.CvcInfo cvcInfo) {
         cardNumberForm.setValue(cardInfo.getCardNumber());
         monthForm.setValue(monthInfo.getMonth());
         yearForm.setValue(yearInfo.getYear());
@@ -36,23 +36,24 @@ public class PaymentFormBuyPage {
         continueButton.click();
     }
 
-    public void cleanFilledForm(){
+    public void cleanFilledForm() {
         cardNumberForm.doubleClick().sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         monthForm.doubleClick().sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         yearForm.doubleClick().sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         ownerForm.doubleClick().sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         cvcForm.doubleClick().sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
     }
-    public PaymentFormBuyPage clear(){
+
+    public PaymentFormBuyPage clear() {
         cleanFilledForm();
         return new PaymentFormBuyPage();
     }
 
-    public void waitSuccessfulNotification(){
+    public void waitSuccessfulNotification() {
         successfulNotification.should(visible, Duration.ofSeconds(10));
     }
 
-    public void waitErrorNotification(){
+    public void waitErrorNotification() {
         errorNotification.should(visible, Duration.ofSeconds(10));
     }
 
@@ -60,39 +61,47 @@ public class PaymentFormBuyPage {
         emptyField.should(visible, Duration.ofSeconds(10));
     }
 
-    public void waitWrongFormat(){
-        wrongFormat.should(visible,Duration.ofSeconds(10));
+    public void waitWrongFormat() {
+        wrongFormat.should(visible, Duration.ofSeconds(10));
     }
 
-    public void waitWrongCardDate(){
+    public void waitWrongCardDate() {
         wrongCardDate.should(visible, Duration.ofSeconds(10));
     }
 
-    public void waitCardExpired(){
+    public void waitCardExpired() {
         cardExpired.should(visible, Duration.ofSeconds(10));
     }
-    public void onlyCardField(DataHelper.CardInfo cardInfo){
+
+    public void onlyCardField(DataHelper.CardInfo cardInfo) {
         cardNumberForm.setValue(cardInfo.getCardNumber());
     }
-    public void emptyCardField(){
+
+    public void emptyCardField() {
         cardNumberForm.should(Condition.empty);
     }
-    public void onlyMonthField(DataHelper.MonthInfo monthInfo){
+
+    public void onlyMonthField(DataHelper.MonthInfo monthInfo) {
         monthForm.setValue(monthInfo.getMonth());
     }
-    public void emptyMonthField(){
+
+    public void emptyMonthField() {
         monthForm.should(empty);
     }
-    public void onlyYearField(DataHelper.YearInfo yearInfo){
+
+    public void onlyYearField(DataHelper.YearInfo yearInfo) {
         yearForm.setValue(yearInfo.getYear());
     }
-    public void emptyYearField(){
+
+    public void emptyYearField() {
         yearForm.should(empty);
     }
-    public void onlyCVCField(DataHelper.CvcInfo cvcInfo){
+
+    public void onlyCVCField(DataHelper.CvcInfo cvcInfo) {
         cvcForm.setValue(cvcInfo.getCvc());
     }
-    public void emptyCVCField(){
+
+    public void emptyCVCField() {
         cvcForm.should(empty);
     }
 

@@ -39,11 +39,11 @@ public class SQLHelper {
         QueryRunner runner = new QueryRunner();
         var sqlStatus = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
         var connection = getConnection();
-            return runner.query(connection, sqlStatus, new ScalarHandler<String>());
+        return runner.query(connection, sqlStatus, new ScalarHandler<String>());
     }
 
     @SneakyThrows
-    public static String getDebitOrderEntryId(){
+    public static String getDebitOrderEntryId() {
         QueryRunner runner = new QueryRunner();
         var sqlStatus = "SELECT payment_id FROM order_entity ORDER BY created DESC LIMIT 1";
         var connection = getConnection();
@@ -51,21 +51,23 @@ public class SQLHelper {
     }
 
     @SneakyThrows
-    public static String getDebitPaymentID(){
+    public static String getDebitPaymentID() {
         QueryRunner runner = new QueryRunner();
         var sql = "SELECT transaction_id FROM payment_entity ORDER BY created DESC LIMIT 1";
         var connection = getConnection();
-        return runner.query(connection,sql, new ScalarHandler<String>());
+        return runner.query(connection, sql, new ScalarHandler<String>());
     }
+
     @SneakyThrows
-    public static String getCreditRequestReEntryId(){
+    public static String getCreditRequestReEntryId() {
         QueryRunner runner = new QueryRunner();
         var sql = "SELECT bank_id FROM credit_request_entity ORDER BY created DESC LIMIT 1";
         var connection = getConnection();
         return runner.query(connection, sql, new ScalarHandler<String>());
     }
+
     @SneakyThrows
-    public static String getCreditOrderEntryId(){
+    public static String getCreditOrderEntryId() {
         QueryRunner runner = new QueryRunner();
         var sql = "SELECT credit_id FROM order_entity ORDER BY created DESC LIMIT 1";
         var connection = getConnection();
