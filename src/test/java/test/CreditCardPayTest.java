@@ -10,6 +10,7 @@ import page.PaymentFormBuyByCreditPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class CreditCardPayTest {
     private MainPage mainPage;
@@ -479,5 +480,34 @@ public class CreditCardPayTest {
         var expected = DataHelper.getFirstCardStatus();
         var actual = SQLHelper.getCreditPaymentStatus();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldAddCreditInOrderEntry() {
+        paymentFormBuyByCreditPage = mainPage.payWithCreditCard();
+        var cardNumber = DataHelper.getFirstCardInfo();
+        var month = DataHelper.getGenerateMonth(1);
+        var year = DataHelper.generateYear(1);
+        var owner = DataHelper.generateOwner("EN");
+        var cvc = DataHelper.generateCVCCode(3);
+        paymentFormBuyByCreditPage.filledForm(cardNumber, month, year, owner, cvc);
+        var expected = SQLHelper.getCreditRequestReEntryId();
+        var actual = SQLHelper.getCreditOrderEntryId();
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    public void shouldDonTAddCreditInOrderEntryStatusDeclined() {
+        paymentFormBuyByCreditPage = mainPage.payWithCreditCard();
+        var cardNumber = DataHelper.getSecondCardInfo();
+        var month = DataHelper.getGenerateMonth(1);
+        var year = DataHelper.generateYear(1);
+        var owner = DataHelper.generateOwner("EN");
+        var cvc = DataHelper.generateCVCCode(3);
+        paymentFormBuyByCreditPage.filledForm(cardNumber, month, year, owner, cvc);
+        var expected = SQLHelper.getCreditRequestReEntryId();
+        var actual = SQLHelper.getCreditOrderEntryId();
+        assertNotEquals(expected, actual);
     }
 }

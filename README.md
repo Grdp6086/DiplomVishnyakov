@@ -39,10 +39,8 @@ GitHUB - склонировать данный проект
 
 3. Запускаем авто-тесты
 + для MySQL:
-  + В классе `src/test/java/data/SQLHelper.java` вставить значение `url` в функции `getConnection` `jdbc:mysql://localhost:3306/app`
   +  В консоле ввести команду: ```./gradlew clean test "-Ddatasource.url=jdbc:mysql://localhost:3306/app"```
 + для PostgreSQL:
-    + В классе `src/test/java/data/SQLHelper.java` вставить значение `url` в функции `getConnection` `jdbc:postgresql://localhost:5432/app`
     + В консоле ввести команду: ```./gradlew clean test "-Ddatasource.url=jdbc:postgresql://localhost:5432/app"```
 5. Генерируем отчёт по итогам тестирования с помощью Allure командой:
 

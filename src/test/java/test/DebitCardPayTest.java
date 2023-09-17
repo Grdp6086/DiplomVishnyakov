@@ -11,6 +11,7 @@ import page.PaymentFormBuyPage;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class DebitCardPayTest {
 
@@ -118,7 +119,7 @@ public class DebitCardPayTest {
 
     @Test
     public void shouldDenyEmptyCVCField() {
-        paymentFormBuyPage = mainPage.payWithDebitCard().clear();
+        paymentFormBuyPage = mainPage.payWithDebitCard();
         var cardNumber = DataHelper.getFirstCardInfo();
         var month = DataHelper.getGenerateMonth(1);
         var year = DataHelper.generateYear(1);
@@ -481,5 +482,33 @@ public class DebitCardPayTest {
         var expected = DataHelper.getFirstCardStatus();
         var actual = SQLHelper.getDebitPaymentStatus();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldAddPaymentIDInOrderEntry() {
+        paymentFormBuyPage = mainPage.payWithDebitCard();
+        var cardNumber = DataHelper.getFirstCardInfo();
+        var month = DataHelper.getGenerateMonth(1);
+        var year = DataHelper.generateYear(1);
+        var owner = DataHelper.generateOwner("EN");
+        var cvc = DataHelper.generateCVCCode(3);
+        paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
+        var expected = SQLHelper.getDebitPaymentID();
+        var actual = SQLHelper.getDebitOrderEntryId();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldDonTAddPaymentIDInOrderEntryStatusDeclined() {
+        paymentFormBuyPage = mainPage.payWithDebitCard();
+        var cardNumber = DataHelper.getSecondCardInfo();
+        var month = DataHelper.getGenerateMonth(1);
+        var year = DataHelper.generateYear(1);
+        var owner = DataHelper.generateOwner("EN");
+        var cvc = DataHelper.generateCVCCode(3);
+        paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
+        var expected = SQLHelper.getDebitPaymentID();
+        var actual = SQLHelper.getDebitOrderEntryId();
+        assertNotEquals(expected, actual);
     }
 }

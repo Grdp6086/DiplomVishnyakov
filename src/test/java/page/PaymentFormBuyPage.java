@@ -44,10 +44,6 @@ public class PaymentFormBuyPage {
         cvcForm.doubleClick().sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
     }
 
-    public PaymentFormBuyPage clear() {
-        cleanFilledForm();
-        return new PaymentFormBuyPage();
-    }
 
     public void waitSuccessfulNotification() {
         successfulNotification.should(visible, Duration.ofSeconds(10));

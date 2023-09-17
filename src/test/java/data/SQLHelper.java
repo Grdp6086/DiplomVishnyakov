@@ -10,10 +10,15 @@ import java.time.Duration;
 
 public class SQLHelper {
 
+    private SQLHelper(){
+
+    }
+
+    private static final String DB_URL = System.getProperty("datasource.url");
 
     @SneakyThrows
     public static Connection getConnection() {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/app", "app", "pass");
+        return DriverManager.getConnection(DB_URL, "app", "pass");
     }
 
     @SneakyThrows
