@@ -12,7 +12,6 @@ import page.PaymentFormBuyPage;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -46,7 +45,6 @@ public class APITest {
         var owner = DataHelper.generateOwner("EN");
         var cvc = DataHelper.generateCVCCode(3);
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
-        sleep(3000);
         var expected = SQLHelper.getDebitPaymentID();
         var actual = SQLHelper.getDebitOrderEntryId();
         assertEquals(expected, actual);
@@ -61,7 +59,6 @@ public class APITest {
         var owner = DataHelper.generateOwner("EN");
         var cvc = DataHelper.generateCVCCode(3);
         paymentFormBuyPage.filledForm(cardNumber, month, year, owner, cvc);
-        sleep(3000);
         var expected = SQLHelper.getDebitPaymentID();
         var actual = SQLHelper.getDebitOrderEntryId();
         assertNotEquals(expected, actual);
@@ -76,7 +73,6 @@ public class APITest {
         var owner = DataHelper.generateOwner("EN");
         var cvc = DataHelper.generateCVCCode(3);
         paymentFormBuyByCreditPage.filledForm(cardNumber, month, year, owner, cvc);
-        sleep(3000);
         var expected = SQLHelper.getCreditRequestReEntryId();
         var actual = SQLHelper.getCreditOrderEntryId();
         assertEquals(expected, actual);
@@ -92,7 +88,6 @@ public class APITest {
         var owner = DataHelper.generateOwner("EN");
         var cvc = DataHelper.generateCVCCode(3);
         paymentFormBuyByCreditPage.filledForm(cardNumber, month, year, owner, cvc);
-        sleep(3000);
         var expected = SQLHelper.getCreditRequestReEntryId();
         var actual = SQLHelper.getCreditOrderEntryId();
         assertNotEquals(expected, actual);

@@ -9,7 +9,6 @@ import page.MainPage;
 import page.PaymentFormBuyByCreditPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreditCardPayTest {
@@ -46,7 +45,6 @@ public class CreditCardPayTest {
         var cvc = DataHelper.generateCVCCode(3);
         paymentFormBuyByCreditPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyByCreditPage.waitSuccessfulNotification();
-        sleep(3000);
         var expected = DataHelper.getFirstCardStatus();
         var actual = SQLHelper.getCreditPaymentStatus();
         assertEquals(expected, actual);
@@ -61,7 +59,6 @@ public class CreditCardPayTest {
         var cvc = DataHelper.generateCVCCode(3);
         paymentFormBuyByCreditPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyByCreditPage.waitErrorNotification();
-        sleep(3000);
         var expected = DataHelper.getSecondCardStatus();
         var actual = SQLHelper.getCreditPaymentStatus();
         assertEquals(expected, actual);
@@ -441,7 +438,6 @@ public class CreditCardPayTest {
         var cvc = DataHelper.getEnterCVC("999");
         paymentFormBuyByCreditPage.filledForm(cardNumber, month, year, owner, cvc);
         paymentFormBuyByCreditPage.waitSuccessfulNotification();
-        sleep(3000);
         var expected = DataHelper.getFirstCardStatus();
         var actual = SQLHelper.getCreditPaymentStatus();
         assertEquals(expected, actual);
