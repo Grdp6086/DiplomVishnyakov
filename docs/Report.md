@@ -17,11 +17,11 @@
 
 **При подключении к СУБД MySQL**
 
-![Sql](../pictures/mySQL.png)
+![Sql](../pictures/sql.png)
 
 **При подключении к СУБД PostgreSQL**
 
-![PostgreSQL](../pictures/postgreSQL.jpeg)
+![PostgreSQL](../pictures/postgresql.png)
 
 ## Общие рекомендации
 По результатам тестирования необходимо:
